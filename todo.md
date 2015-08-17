@@ -1,6 +1,8 @@
 String calculator:
 http://osherove.com/tdd-kata-1/
 
+int add(string numbers);
+
 - Method can take 0, 1 or 2 numbers and will return their sum
     - Comma is a delimiter between numbers
 - Handle unknown amount of numbers
