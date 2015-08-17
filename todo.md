@@ -4,6 +4,7 @@ http://osherove.com/tdd-kata-1/
 int add(string numbers);
 
 - Method can take 0, 1 or 2 numbers and will return their sum
+    - return 0 for an empty string
     - Comma is a delimiter between numbers
 - Handle unknown amount of numbers
 - Allows new line as a delimiter
