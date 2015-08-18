@@ -2,20 +2,18 @@
 using ::testing::Eq;
 using namespace std;
 
-int convertToInt(string text) {
+int toInt(string text) {
   return atoi(text.c_str());
 }
 
 int add(string numbers) {
   if (numbers.empty())
     return 0;
-  int sum = 0;
-  size_t position;
-  while ( (position = numbers.find(",")) != string::npos ) {
-    sum += convertToInt(numbers.substr(0,position));
-    numbers.erase(0, position + 1);
+  size_t position = numbers.find(",");
+  if ( position != string::npos ) {
+    return toInt(numbers.substr(0, position)) + toInt(numbers.substr(position + 1));
   }
-  return convertToInt(numbers);
+  return toInt(numbers);
 }
 
 TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
@@ -36,7 +34,7 @@ TEST(StringCalculator, ReturnsZeroWhileSummingUpTwoZeros) {
   ASSERT_THAT(add("0,0"), Eq(0));
 }
 
-TEST(StringCalculator, ReturnsOneForTwoNumbers) {
-  ASSERT_THAT(add("0,1"), Eq(1));
+TEST(StringCalculator, SumsTwoNumbers) {
+  ASSERT_THAT(add("12,23"), Eq(35));
 }
 
