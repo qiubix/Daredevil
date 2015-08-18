@@ -2,10 +2,14 @@
 using ::testing::Eq;
 using namespace std;
 
+int convertToInt(string text) {
+  return atoi(text.c_str());
+}
+
 int add(string numbers) {
-  if (numbers == "")
+  if (numbers.empty())
     return 0;
-  return atoi(numbers.c_str());
+  return convertToInt(numbers);
 }
 
 TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
