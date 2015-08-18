@@ -3,9 +3,9 @@ using ::testing::Eq;
 using namespace std;
 
 int add(string numbers) {
-  if (numbers == "1")
-    return 1;
-  return 0;
+  if (numbers == "")
+    return 0;
+  return atoi(numbers.c_str());
 }
 
 TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
@@ -15,3 +15,10 @@ TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
 TEST(StringCalculator, ReturnsOneForSingleOne) {
   ASSERT_THAT(add("1"), Eq(1));
 }
+
+TEST(StringCalculator, ReturnsSameNumberForStringWithOneCharacter) {
+  ASSERT_THAT(add("3"), Eq(3));
+}
+
+
+
