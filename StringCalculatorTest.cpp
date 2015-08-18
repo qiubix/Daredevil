@@ -10,10 +10,14 @@ int add(string numbers) {
   if (numbers.empty())
     return 0;
   size_t position = numbers.find(",");
-  if ( position != string::npos ) {
-    return toInt(numbers.substr(0, position)) + toInt(numbers.substr(position + 1));
+  int sum = 0;
+  while ( position != string::npos ) {
+    sum += toInt(numbers.substr(0, position));
+    numbers.erase(0, position + 1);
+    position = numbers.find(",");
   }
-  return toInt(numbers);
+  sum += toInt(numbers);
+  return sum;
 }
 
 TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
@@ -34,7 +38,12 @@ TEST(StringCalculator, ReturnsZeroWhileSummingUpTwoZeros) {
   ASSERT_THAT(add("0,0"), Eq(0));
 }
 
+
 TEST(StringCalculator, SumsTwoNumbers) {
   ASSERT_THAT(add("12,23"), Eq(35));
+}
+
+TEST(StringCalculator, SumsThreeNumbers) {
+  ASSERT_THAT(add("23,2,100"), Eq(125));
 }
 
