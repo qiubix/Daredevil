@@ -6,24 +6,24 @@ int toInt(const string& text) {
   return atoi(text.c_str());
 }
 
+const vector<string> delimiters = { ",", "\n" };
+
 string head(const string& text) {
-  size_t position = text.find(",");
-  if (position == string::npos) {
-    position = text.find("\n");
-    if (position == string::npos)
-      return text;
+  for ( auto delimiter : delimiters ) {
+    auto position = text.find(delimiter);
+    if ( position != string::npos )
+      return text.substr(0, position);
   }
-  return text.substr(0, position);
+  return text;
 }
 
 string tail(const string& text) {
-  size_t position = text.find(",");
-  if (position == string::npos) {
-    position = text.find("\n");
-    if (position == string::npos)
-      return "";
+  for ( auto delimiter : delimiters ) {
+    auto position = text.find(delimiter);
+    if ( position != string::npos )
+      return text.substr(position + 1);
   }
-  return text.substr(position + 1);
+  return "";
 }
 
 int add(string numbers) {
