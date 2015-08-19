@@ -8,15 +8,21 @@ int toInt(const string& text) {
 
 string head(const string& text) {
   size_t position = text.find(",");
-  if (position == string::npos)
-    return text;
+  if (position == string::npos) {
+    position = text.find("\n");
+    if (position == string::npos)
+      return text;
+  }
   return text.substr(0, position);
 }
 
 string tail(const string& text) {
   size_t position = text.find(",");
-  if (position == string::npos)
-    return "";
+  if (position == string::npos) {
+    position = text.find("\n");
+    if (position == string::npos)
+      return "";
+  }
   return text.substr(position + 1);
 }
 
@@ -56,5 +62,9 @@ TEST(StringCalculator, SumsTwoNumbers) {
 
 TEST(StringCalculator, SumsThreeNumbers) {
   ASSERT_THAT(add("23,2,100"), Eq(125));
+}
+
+TEST(StringCalculator, AllowsNewLineAsADelimiter) {
+  ASSERT_THAT(add("23\n2"), Eq(25));
 }
 
