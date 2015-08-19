@@ -2,21 +2,32 @@
 using ::testing::Eq;
 using namespace std;
 
-int toInt(string text) {
+int toInt(const string& text) {
   return atoi(text.c_str());
+}
+
+string head(const string& text) {
+  size_t position = text.find(",");
+  if (position == string::npos)
+    return text;
+  return text.substr(0, position);
+}
+
+string tail(const string& text) {
+  size_t position = text.find(",");
+  if (position == string::npos)
+    return "";
+  return text.substr(position + 1);
 }
 
 int add(string numbers) {
   if (numbers.empty())
     return 0;
-  size_t position = numbers.find(",");
   int sum = 0;
-  while ( position != string::npos ) {
-    sum += toInt(numbers.substr(0, position));
-    numbers.erase(0, position + 1);
-    position = numbers.find(",");
+  while ( numbers != "" ) {
+    sum += toInt(head(numbers));
+    numbers = tail(numbers);
   }
-  sum += toInt(numbers);
   return sum;
 }
 
