@@ -8,22 +8,26 @@ int toInt(const string& text) {
 
 const vector<string> delimiters = { ",", "\n" };
 
-string head(const string& text) {
+size_t findDelimiter(const string& text) {
   for ( auto delimiter : delimiters ) {
     auto position = text.find(delimiter);
     if ( position != string::npos )
-      return text.substr(0, position);
+      return position;
   }
-  return text;
+  return text.length();
+}
+
+string head(const string& text) {
+  auto position = findDelimiter(text);
+  return text.substr(0, position);
 }
 
 string tail(const string& text) {
-  for ( auto delimiter : delimiters ) {
-    auto position = text.find(delimiter);
-    if ( position != string::npos )
-      return text.substr(position + 1);
-  }
-  return "";
+  auto position = findDelimiter(text);
+  if ( position != text.length() )
+    return text.substr(position + 1);
+  else
+    return text.substr(position);
 }
 
 int add(string numbers) {
@@ -54,7 +58,6 @@ TEST(StringCalculator, ReturnsSameNumberForStringWithOneNumber) {
 TEST(StringCalculator, ReturnsZeroWhileSummingUpTwoZeros) {
   ASSERT_THAT(add("0,0"), Eq(0));
 }
-
 
 TEST(StringCalculator, SumsTwoNumbers) {
   ASSERT_THAT(add("12,23"), Eq(35));
