@@ -30,14 +30,26 @@ string tail(const string& text) {
   return text.substr(position + 1);
 }
 
+bool hasComment(const string& text) {
+  return text.substr(0,2) == "//";
+}
+
+void addNewDelimiter(const string& text) {
+  auto newDelimiter = text.substr(2,1);
+  delimiters.push_back(newDelimiter);
+}
+
+string removeComment(const string& text) {
+  auto position = findDelimiter(text);
+  return text.substr(position + 1);
+}
+
 int add(string numbers) {
   if (numbers.empty())
     return 0;
-  if (numbers.substr(0,2) == "//") {
-    auto position = findDelimiter(numbers);
-    auto newDelimiter = numbers.substr(2,1);
-    delimiters.push_back(newDelimiter);
-    numbers.erase(numbers.begin(), numbers.begin() + position + 1);
+  if (hasComment(numbers)) {
+    addNewDelimiter(numbers);
+    numbers = removeComment(numbers);
   }
   int sum = 0;
   while ( numbers != "" ) {
