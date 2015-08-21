@@ -1,45 +1,6 @@
 #include "gmock/gmock.h"
+#include "StringCalculator.hpp"
 using ::testing::Eq;
-using namespace std;
-
-int toInt(const string& text) {
-  return atoi(text.c_str());
-}
-
-const vector<string> delimiters = { ",", "\n" };
-
-size_t findDelimiter(const string& text) {
-  for ( auto delimiter : delimiters ) {
-    auto position = text.find(delimiter);
-    if ( position != string::npos )
-      return position;
-  }
-  return text.length();
-}
-
-string head(const string& text) {
-  auto position = findDelimiter(text);
-  return text.substr(0, position);
-}
-
-string tail(const string& text) {
-  auto position = findDelimiter(text);
-  if ( position != text.length() )
-    return text.substr(position + 1);
-  else
-    return text.substr(position);
-}
-
-int add(string numbers) {
-  if (numbers.empty())
-    return 0;
-  int sum = 0;
-  while ( numbers != "" ) {
-    sum += toInt(head(numbers));
-    numbers = tail(numbers);
-  }
-  return sum;
-}
 
 TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
   ASSERT_THAT(add(""), Eq(0));
@@ -69,5 +30,9 @@ TEST(StringCalculator, SumsThreeNumbers) {
 
 TEST(StringCalculator, AllowsNewLineAsADelimiter) {
   ASSERT_THAT(add("23\n2"), Eq(25));
+}
+
+TEST(StringCalculator, SupportsDifferentDelimiters) {
+  ASSERT_THAT(add("//-\n16-4"), Eq(20));
 }
 
