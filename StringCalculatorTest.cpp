@@ -36,3 +36,7 @@ TEST(StringCalculator, SupportsDifferentDelimiters) {
   ASSERT_THAT(add("//-\n16-4"), Eq(20));
 }
 
+TEST(StringCalculator, ThrowsNegativesAreNotAllowedExceptionForOneNegativeNumber) {
+  ASSERT_THROW(add("16,-4"), NegativesAreNotAllowed);
+}
+

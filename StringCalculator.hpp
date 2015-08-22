@@ -1,7 +1,16 @@
 #ifndef STRING_CALCULATOR_HPP
 #define STRING_CALCULATOR_HPP
 
+#include <exception>
+
 using namespace std;
+
+class NegativesAreNotAllowed : public exception
+{
+  virtual const char* what() const throw() {
+    return "Negatives Are Not Allowed";
+  }
+};
 
 int toInt(const string& text) {
   return atoi(text.c_str());
@@ -53,9 +62,13 @@ int add(string numbers) {
   }
   int sum = 0;
   while ( numbers != "" ) {
-    sum += toInt(head(numbers));
+    auto nextNumber = head(numbers);
+    if (nextNumber[0] == '-')
+      throw NegativesAreNotAllowed();
+    sum += toInt(nextNumber);
     numbers = tail(numbers);
   }
+  delimiters = { ",", "\n" };
   return sum;
 }
 
