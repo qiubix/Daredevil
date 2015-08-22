@@ -7,8 +7,9 @@ using namespace std;
 
 class NegativesAreNotAllowed : public exception
 {
+public:
   virtual const char* what() const throw() {
-    return "Negatives Are Not Allowed";
+    return "Negatives are not allowed: ";
   }
 };
 
