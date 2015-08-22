@@ -62,10 +62,9 @@ int add(string numbers) {
   }
   int sum = 0;
   while ( numbers != "" ) {
-    auto nextNumber = head(numbers);
-    if (nextNumber[0] == '-')
+    if (numbers[0] == '-')
       throw NegativesAreNotAllowed();
-    sum += toInt(nextNumber);
+    sum += toInt(head(numbers));
     numbers = tail(numbers);
   }
   delimiters = { ",", "\n" };
