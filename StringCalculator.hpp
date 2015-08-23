@@ -62,6 +62,16 @@ int nextNumber(const string& text) {
   return toInt(head(text));
 }
 
+string buildExceptionMessage(vector<int> negatives) {
+  string negativesList = "";
+  for (auto i : negatives){
+    negativesList += to_string(i);
+    if (i != negatives.back())
+      negativesList += ",";
+  }
+  return negativesList;
+}
+
 int add(string numbers) {
   if (numbers.empty())
     return 0;
@@ -69,6 +79,7 @@ int add(string numbers) {
     addNewDelimiter(numbers);
     numbers = removeComment(numbers);
   }
+
   int sum = 0;
   vector<int> negatives;
   while ( numbers != "" ) {
@@ -78,16 +89,14 @@ int add(string numbers) {
     sum += next;
     numbers = tail(numbers);
   }
+
   if (!negatives.empty()) {
-    string negativesList = "";
-    for (auto i : negatives){
-      negativesList += to_string(i);
-      if (i != negatives.back())
-        negativesList += ",";
-    }
+    auto negativesList = buildExceptionMessage(negatives);
     throw NegativesAreNotAllowed(negativesList);
   }
+
   delimiters = { ",", "\n" };
+
   return sum;
 }
 
