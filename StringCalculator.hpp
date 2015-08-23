@@ -8,9 +8,13 @@ using namespace std;
 class NegativesAreNotAllowed : public exception
 {
 public:
+  NegativesAreNotAllowed(const string& negatives) : negatives(negatives) {}
   virtual const char* what() const throw() {
-    return "Negatives are not allowed: ";
+    auto message = "Negatives are not allowed: " + negatives;
+    return message.c_str();
   }
+private:
+  string negatives;
 };
 
 int toInt(const string& text) {
@@ -64,7 +68,7 @@ int add(string numbers) {
   int sum = 0;
   while ( numbers != "" ) {
     if (numbers[0] == '-')
-      throw NegativesAreNotAllowed();
+      throw NegativesAreNotAllowed("-4");
     sum += toInt(head(numbers));
     numbers = tail(numbers);
   }

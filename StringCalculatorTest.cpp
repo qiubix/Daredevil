@@ -1,6 +1,7 @@
 #include "gmock/gmock.h"
 #include "StringCalculator.hpp"
 using ::testing::Eq;
+using ::testing::Pointee;
 
 TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
   ASSERT_THAT(add(""), Eq(0));
@@ -45,7 +46,7 @@ TEST(StringCalculator, ListsOneNegativeNumberInExceptionMessage) {
   try {
     add("16,-4");
   } catch (NegativesAreNotAllowed& ex) {
-    ASSERT_THAT(ex.what(), Eq("Negatives are not allowed: -4"));
+    ASSERT_THAT(string(ex.what()), Eq(string("Negatives are not allowed: -4")));
   }
 }
 
