@@ -41,12 +41,19 @@ TEST(StringCalculator, ThrowsNegativesAreNotAllowedExceptionForOneNegativeNumber
   ASSERT_THROW(add("16,-4"), NegativesAreNotAllowed);
 }
 
-;
 TEST(StringCalculator, ListsOneNegativeNumberInExceptionMessage) {
   try {
     add("16,-4");
   } catch (NegativesAreNotAllowed& ex) {
     ASSERT_THAT(string(ex.what()), Eq(string("Negatives are not allowed: -4")));
+  }
+}
+
+TEST(StringCalculator, ListsTwoNegativeNumbersInExceptionMessage) {
+  try {
+    add("-23,-7");
+  } catch (NegativesAreNotAllowed& ex) {
+    ASSERT_THAT(string(ex.what()), Eq(string("Negatives are not allowed: -23,-7")));
   }
 }
 
