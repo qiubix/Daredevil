@@ -58,6 +58,10 @@ string removeComment(const string& text) {
   return text.substr(position + 1);
 }
 
+int nextNumber(const string& text) {
+  return toInt(head(text));
+}
+
 int add(string numbers) {
   if (numbers.empty())
     return 0;
@@ -66,11 +70,22 @@ int add(string numbers) {
     numbers = removeComment(numbers);
   }
   int sum = 0;
+  vector<int> negatives;
   while ( numbers != "" ) {
-    if (numbers[0] == '-')
-      throw NegativesAreNotAllowed("-4");
-    sum += toInt(head(numbers));
+    auto next = nextNumber(numbers);
+    if (next < 0)
+      negatives.push_back(next);
+    sum += next;
     numbers = tail(numbers);
+  }
+  if (!negatives.empty()) {
+    string negativesList = "";
+    for (auto i : negatives){
+      negativesList += to_string(i);
+      if (i != negatives.back())
+        negativesList += ",";
+    }
+    throw NegativesAreNotAllowed(negativesList);
   }
   delimiters = { ",", "\n" };
   return sum;
