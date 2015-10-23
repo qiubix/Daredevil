@@ -1,4 +1,9 @@
 sudo: false
 language: cpp
 compiler: gcc
+before_script:
+  - wget https://googlemock.googlecode.com/files/gmock-1.7.0.zip -0 /tmp/gmock.zip
+  - unzip /tmp/gmock.zip
+  - cd /tmp/gmock && cmake . && make && cd gtest && cmake . && make
+  - export GMOCK_ROOT=/tmp/gmock
 script: cmake . && make && make test
