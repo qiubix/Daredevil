@@ -4,6 +4,7 @@ compiler: gcc
 before_script:
   - wget https://googlemock.googlecode.com/files/gmock-1.7.0.zip -O /tmp/gmock.zip
   - cd /tmp && unzip /tmp/gmock.zip
-  - cd /tmp/gmock-1.7.0 && cmake . && make && cd gtest && cmake . && make
+  - cd /tmp/gmock-1.7.0 && cmake . && make -j4 && cd gtest && cmake . && make -j4
   - export GMOCK_ROOT=/tmp/gmock-1.7.0
+  - cd /build/qiubix/Daredevil
 script: cmake . && make && make test
