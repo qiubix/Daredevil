@@ -9,7 +9,7 @@ class NegativesAreNotAllowed : public exception
 {
 public:
   NegativesAreNotAllowed(const string& negatives) : negatives(negatives) {}
-  ~NegativesAreNotAllowed() const throw() {}
+  ~NegativesAreNotAllowed() throw() {}
   virtual const char* what() const throw() {
     auto message = "Negatives are not allowed: " + negatives;
     return message.c_str();
