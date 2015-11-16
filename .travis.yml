@@ -7,4 +7,5 @@ before_script:
   - cd /tmp/gmock-1.6.0 && mkdir build && cd build && cmake .. && make -j4 && cd ../gtest && mkdir build && cd build && cmake .. && make -j4
   - export GMOCK_HOME=/tmp/gmock-1.6.0
   - cd ~/build/qiubix/Daredevil
-script: cmake . && make && make test
+  - mkdir build && cd build
+script: cmake .. -DCMAKE_BUILD_TYPE=Debug && make && make coveralls
