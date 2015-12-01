@@ -19,6 +19,7 @@ coveralls_turn_on_coverage()
 
 set(sources
    main.cpp
+   StringCalculator.hpp
    StringCalculatorTest.cpp)
 
 coveralls_setup(
