@@ -24,4 +24,5 @@ TEST(StringCalculator, SumsNumbersWithMoreThanOneDigit) {
 
 TEST(StringCalculator, SumsUnknownAmountOfNumbers) {
   ASSERT_THAT(add("1,1,1"), Eq(3));
+  ASSERT_THAT(add("1,10,100,1000"), Eq(1111));
 }
