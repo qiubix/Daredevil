@@ -10,3 +10,7 @@ TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
 TEST(StringCalculator, ReturnsOneForSingleOne) {
   ASSERT_THAT(add("1"), Eq(1));
 }
+
+TEST(StringCalculator, ReturnsTwoForSingleTwo) {
+  ASSERT_THAT(add("2"), Eq(2));
+}

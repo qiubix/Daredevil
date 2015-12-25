@@ -3,10 +3,15 @@
 
 using namespace std;
 
+int toInt(const string& text) {
+  return atoi(text.c_str());
+}
+
 int add(string numbers) {
-  if (numbers == "1")
-    return 1;
-  return 0;
+  if (numbers.empty())
+    return 0;
+  else
+    return toInt(numbers);
 }
 
 #endif //STRING_CALCULATOR_HPP
