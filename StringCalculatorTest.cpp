@@ -7,22 +7,17 @@ TEST(StringCalculator, ReturnsZeroForAnEmptyString) {
   ASSERT_THAT(add(""), Eq(0));
 }
 
-TEST(StringCalculator, ReturnsOneForSingleOne) {
+TEST(StringCalculator, ReturnsTheSameNumberForSingleNumber) {
   ASSERT_THAT(add("1"), Eq(1));
-}
-
-TEST(StringCalculator, ReturnsTwoForSingleTwo) {
   ASSERT_THAT(add("2"), Eq(2));
 }
 
-TEST(StringCalculator, ReturnsTwoForDoubleOnes) {
+TEST(StringCalculator, SumsTwoSingleDigitNumbers) {
   ASSERT_THAT(add("1,1"), Eq(2));
-}
-
-TEST(StringCalculator, ReturnsThreeForTwoDifferentNumbers) {
   ASSERT_THAT(add("1,2"), Eq(3));
 }
 
 TEST(StringCalculator, SumsNumbersWithMoreThanOneDigit) {
   ASSERT_THAT(add("11,12"), Eq(23));
+  ASSERT_THAT(add("213,112"), Eq(325));
 }
