@@ -21,3 +21,7 @@ TEST(StringCalculator, SumsNumbersWithMoreThanOneDigit) {
   ASSERT_THAT(add("11,12"), Eq(23));
   ASSERT_THAT(add("213,112"), Eq(325));
 }
+
+TEST(StringCalculator, SumsUnknownAmountOfNumbers) {
+  ASSERT_THAT(add("1,1,1"), Eq(3));
+}
