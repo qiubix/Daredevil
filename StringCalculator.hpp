@@ -12,11 +12,13 @@ bool hasOnlyOneNumber(const string& numbers) {
 }
 
 string head(const string& numbers) {
-  return numbers.substr(0, 1);
+  size_t delimiterPosition = numbers.find(',');
+  return numbers.substr(0, delimiterPosition);
 }
 
 string tail(const string& numbers) {
-  return numbers.substr(2, 1);
+  size_t delimiterPosition = numbers.find(',');
+  return numbers.substr(delimiterPosition + 1);
 }
 
 int add(string numbers) {

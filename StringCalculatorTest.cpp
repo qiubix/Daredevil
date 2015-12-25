@@ -22,3 +22,7 @@ TEST(StringCalculator, ReturnsTwoForDoubleOnes) {
 TEST(StringCalculator, ReturnsThreeForTwoDifferentNumbers) {
   ASSERT_THAT(add("1,2"), Eq(3));
 }
+
+TEST(StringCalculator, SumsNumbersWithMoreThanOneDigit) {
+  ASSERT_THAT(add("11,12"), Eq(23));
+}
