@@ -14,3 +14,7 @@ TEST(StringCalculator, ReturnsOneForSingleOne) {
 TEST(StringCalculator, ReturnsTwoForSingleTwo) {
   ASSERT_THAT(add("2"), Eq(2));
 }
+
+TEST(StringCalculator, ReturnsTwoForDoubleOnes) {
+  ASSERT_THAT(add("1,1"), Eq(2));
+}
