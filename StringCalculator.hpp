@@ -10,12 +10,10 @@ int toInt(const string& text) {
 int add(string numbers) {
   if (numbers.empty())
     return 0;
+  else if (numbers.find(',') == string::npos)
+    return toInt(numbers);
   else
-    if (numbers == "1,1") {
-      return 2;
-    } else {
-      return toInt(numbers);
-    }
+    return 2;
 }
 
 #endif //STRING_CALCULATOR_HPP
