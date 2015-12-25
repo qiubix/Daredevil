@@ -18,7 +18,14 @@ string getTail(const string &numbers, size_t delimiterPosition) {
 }
 
 size_t findDelimiter(const string &numbers) {
-  return numbers.find(',');
+  vector<char> delimiters = {',', '\n'};
+  size_t delimiterPosition = string::npos;
+  for (auto delimiter : delimiters) {
+    delimiterPosition = numbers.find(delimiter);
+    if (delimiterPosition != string::npos)
+      break;
+  }
+  return delimiterPosition;
 }
 
 int add(string numbers) {

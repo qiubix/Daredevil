@@ -26,3 +26,7 @@ TEST(StringCalculator, SumsUnknownAmountOfNumbers) {
   ASSERT_THAT(add("1,1,1"), Eq(3));
   ASSERT_THAT(add("1,10,100,1000"), Eq(1111));
 }
+
+TEST(StringCalculator, HandlesNewLineAsADelimiter) {
+  ASSERT_THAT(add("1\n2"), Eq(3));
+}
