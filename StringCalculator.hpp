@@ -7,8 +7,16 @@ int toInt(const string& text) {
   return atoi(text.c_str());
 }
 
-bool hasOnlyOneNumber(const string &numbers) {
+bool hasOnlyOneNumber(const string& numbers) {
   return numbers.find(',') == string::npos;
+}
+
+string head(const string& numbers) {
+  return numbers.substr(0, 1);
+}
+
+string tail(const string& numbers) {
+  return numbers.substr(2, 1);
 }
 
 int add(string numbers) {
@@ -17,7 +25,7 @@ int add(string numbers) {
   else if (hasOnlyOneNumber(numbers))
     return toInt(numbers);
   else
-    return 2;
+    return toInt(head(numbers)) + toInt(tail(numbers));
 }
 
 #endif //STRING_CALCULATOR_HPP

@@ -18,3 +18,7 @@ TEST(StringCalculator, ReturnsTwoForSingleTwo) {
 TEST(StringCalculator, ReturnsTwoForDoubleOnes) {
   ASSERT_THAT(add("1,1"), Eq(2));
 }
+
+TEST(StringCalculator, ReturnsThreeForTwoDifferentNumbers) {
+  ASSERT_THAT(add("1,2"), Eq(3));
+}
