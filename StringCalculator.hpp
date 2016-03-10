@@ -16,8 +16,10 @@ int add(string numbers) {
     return 0;
   else if (hasOnlyOneNumber(numbers))
     return toInt(numbers);
-  else
-    return 2;
+  else {
+    auto delimiterPosition = numbers.find(',');
+    return toInt(numbers.substr(0, delimiterPosition)) + toInt(numbers.substr(delimiterPosition+1));
+  }
 }
 
 #endif //STRING_CALCULATOR_HPP
