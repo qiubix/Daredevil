@@ -18,6 +18,8 @@ string head(string text) {
 
 string tail(string text) {
   auto delimiterPosition = text.find(',');
+  if (delimiterPosition == string::npos)
+    return "";
   return text.substr(delimiterPosition + 1);
 }
 
@@ -27,9 +29,12 @@ int add(string numbers) {
   else if (hasOnlyOneNumber(numbers))
     return toInt(numbers);
   else {
-    auto firstNumber = head(numbers);
-    auto secondNumber = tail(numbers);
-    return toInt(firstNumber) + toInt(secondNumber);
+    int sum = 0;
+    while (!numbers.empty()) {
+      sum += toInt(head(numbers));
+      numbers = tail(numbers);
+    }
+    return sum;
   }
 }
 
