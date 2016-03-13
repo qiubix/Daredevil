@@ -9,15 +9,21 @@ int toInt(string text) {
 
 string head(string text) {
   auto delimiterPosition = text.find(',');
-  if (delimiterPosition == string::npos)
-    return text;
+  if (delimiterPosition == string::npos) {
+    delimiterPosition = text.find('\n');
+    if (delimiterPosition == string::npos)
+      return text;
+  }
   return text.substr(0, delimiterPosition);
 }
 
 string tail(string text) {
   auto delimiterPosition = text.find(',');
-  if (delimiterPosition == string::npos)
-    return "";
+  if (delimiterPosition == string::npos) {
+    delimiterPosition = text.find('\n');
+    if (delimiterPosition == string::npos)
+      return "";
+  }
   return text.substr(delimiterPosition + 1);
 }
 
