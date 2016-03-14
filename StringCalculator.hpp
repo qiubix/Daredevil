@@ -7,24 +7,24 @@ int toInt(string text) {
   return atoi(text.c_str());
 }
 
+const vector<string> delimiters = {",", "\n"};
+
 string head(string text) {
-  auto delimiterPosition = text.find(',');
-  if (delimiterPosition == string::npos) {
-    delimiterPosition = text.find('\n');
-    if (delimiterPosition == string::npos)
-      return text;
+  for (auto delimiter : delimiters) {
+    auto position = text.find(delimiter);
+    if (position != string::npos)
+      return text.substr(0, position);
   }
-  return text.substr(0, delimiterPosition);
+  return text;
 }
 
 string tail(string text) {
-  auto delimiterPosition = text.find(',');
-  if (delimiterPosition == string::npos) {
-    delimiterPosition = text.find('\n');
-    if (delimiterPosition == string::npos)
-      return "";
+  for (auto delimiter : delimiters) {
+    auto position = text.find(delimiter);
+    if (position != string::npos)
+      return text.substr(position + 1);
   }
-  return text.substr(delimiterPosition + 1);
+  return "";
 }
 
 int add(string numbers) {
