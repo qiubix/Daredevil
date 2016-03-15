@@ -4,6 +4,10 @@
 using namespace std;
 
 class NegativesAreNotAllowed : public exception {
+public:
+  virtual const char* what() const throw() {
+    return "Negatives are not allowed: -4";
+  }
 };
 
 int toInt(string text) {

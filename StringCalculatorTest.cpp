@@ -36,3 +36,12 @@ TEST(StringCalculator, SupportsConfiguringDelimiter) {
 TEST(StringCalculator, ThrowsNegativesAreNotAllowedExceptionForOneNegativeNumber) {
   ASSERT_THROW(add("16,-4"), NegativesAreNotAllowed);
 }
+
+TEST(StringCalculator, ListsOneNegativeNumberInExceptionMessage) {
+  try {
+    add("16,-4");
+  } catch (NegativesAreNotAllowed& ex) {
+    ASSERT_THAT(ex.what(), Eq("Negatives are not allowed: -4"));
+  }
+}
+
