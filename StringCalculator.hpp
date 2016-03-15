@@ -9,22 +9,28 @@ int toInt(string text) {
 
 const vector<string> delimiters = {",", "\n"};
 
-string head(string text) {
+size_t findDelimiter(string text) {
   for (auto delimiter : delimiters) {
     auto position = text.find(delimiter);
     if (position != string::npos)
-      return text.substr(0, position);
+      return position;
   }
-  return text;
+  return text.length();
+}
+
+string head(string text) {
+  auto position = findDelimiter(text);
+  return text.substr(0, position);
 }
 
 string tail(string text) {
-  for (auto delimiter : delimiters) {
-    auto position = text.find(delimiter);
-    if (position != string::npos)
-      return text.substr(position + 1);
+  auto position = findDelimiter(text);
+  if (position == text.length()) {
+    return "";
   }
-  return "";
+  else {
+    return text.substr(position + 1);
+  }
 }
 
 int add(string numbers) {
