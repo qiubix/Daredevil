@@ -51,6 +51,10 @@ string tail(string text) {
   }
 }
 
+bool isNextNumberNegative(const string &text) {
+  return text[0] == '-';
+}
+
 int add(string numbers) {
   if (numbers.empty())
     return 0;
@@ -60,10 +64,9 @@ int add(string numbers) {
   }
   int sum = 0;
   while (!numbers.empty()) {
-    auto nextNumber = head(numbers);
-    if (nextNumber[0] == '-')
+    if (isNextNumberNegative(numbers))
       throw NegativesAreNotAllowed();
-    sum += toInt(nextNumber);
+    sum += toInt(head(numbers));
     numbers = tail(numbers);
   }
   delimiters = {",", "\n"};
