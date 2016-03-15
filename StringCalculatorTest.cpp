@@ -32,3 +32,7 @@ TEST(StringCalculator, HandlesNewLineAsADelimiter) {
 TEST(StringCalculator, SupportsConfiguringDelimiter) {
   ASSERT_THAT(add("//-\n16-2"), Eq(18));
 }
+
+TEST(StringCalculator, ThrowsNegativesAreNotAllowedExceptionForOneNegativeNumber) {
+  ASSERT_THROW(add("16,-4"), NegativesAreNotAllowed);
+}

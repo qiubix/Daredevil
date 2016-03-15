@@ -3,6 +3,9 @@
 
 using namespace std;
 
+class NegativesAreNotAllowed : public exception {
+};
+
 int toInt(string text) {
   return atoi(text.c_str());
 }
@@ -57,9 +60,13 @@ int add(string numbers) {
   }
   int sum = 0;
   while (!numbers.empty()) {
-    sum += toInt(head(numbers));
+    auto nextNumber = head(numbers);
+    if (nextNumber[0] == '-')
+      throw NegativesAreNotAllowed();
+    sum += toInt(nextNumber);
     numbers = tail(numbers);
   }
+  delimiters = {",", "\n"};
   return sum;
 }
 
