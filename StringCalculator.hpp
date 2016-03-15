@@ -7,7 +7,7 @@ int toInt(string text) {
   return atoi(text.c_str());
 }
 
-const vector<string> delimiters = {",", "\n"};
+vector<string> delimiters = {",", "\n"};
 
 size_t findDelimiter(string text) {
   for (auto delimiter : delimiters) {
@@ -36,6 +36,12 @@ string tail(string text) {
 int add(string numbers) {
   if (numbers.empty())
     return 0;
+  if (numbers.substr(0,2) == "//") {
+    auto position = findDelimiter(numbers);
+    auto newDelimiter = numbers.substr(2,1);
+    delimiters.push_back(newDelimiter);
+    numbers = numbers.substr(position + 1);
+  }
   int sum = 0;
   while (!numbers.empty()) {
     sum += toInt(head(numbers));
