@@ -5,9 +5,14 @@ using namespace std;
 
 class NegativesAreNotAllowed : public exception {
 public:
+  NegativesAreNotAllowed(const string& negativesList) : negatives(negativesList) {}
   virtual const char* what() const throw() {
-    return "Negatives are not allowed: -4";
+    auto message = "Negatives are not allowed: " + negatives;
+    return message.c_str();
   }
+
+private:
+  string negatives;
 };
 
 int toInt(string text) {
@@ -59,6 +64,10 @@ bool isNextNumberNegative(const string &text) {
   return text[0] == '-';
 }
 
+int nextNumber(string numbers) {
+  return toInt(head(numbers));
+}
+
 int add(string numbers) {
   if (numbers.empty())
     return 0;
@@ -67,11 +76,24 @@ int add(string numbers) {
     numbers = removeComment(numbers);
   }
   int sum = 0;
+  vector<int> negatives;
   while (!numbers.empty()) {
-    if (isNextNumberNegative(numbers))
-      throw NegativesAreNotAllowed();
-    sum += toInt(head(numbers));
+    auto next = nextNumber(numbers);
+    if (next < 0) {
+      negatives.push_back(next);
+    }
+    sum += next;
     numbers = tail(numbers);
+  }
+  if ( !negatives.empty() ) {
+    string negativesList = "";
+    for (auto i : negatives) {
+      negativesList += to_string(i);
+      if (i != negatives.back()) {
+        negativesList += ",";
+      }
+    }
+    throw NegativesAreNotAllowed(negativesList);
   }
   delimiters = {",", "\n"};
   return sum;
