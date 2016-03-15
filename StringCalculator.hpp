@@ -18,6 +18,21 @@ size_t findDelimiter(string text) {
   return text.length();
 }
 
+bool hasComment(const string &text) {
+  return text.substr(0, 2) == "//";
+}
+
+void addNewDelimiter(const string &text) {
+  auto newDelimiter = text.substr(2, 1);
+  delimiters.push_back(newDelimiter);
+}
+
+string &removeComment(string &text) {
+  auto position = findDelimiter(text);
+  text = text.substr(position + 1);
+  return text;
+}
+
 string head(string text) {
   auto position = findDelimiter(text);
   return text.substr(0, position);
@@ -36,11 +51,9 @@ string tail(string text) {
 int add(string numbers) {
   if (numbers.empty())
     return 0;
-  if (numbers.substr(0,2) == "//") {
-    auto position = findDelimiter(numbers);
-    auto newDelimiter = numbers.substr(2,1);
-    delimiters.push_back(newDelimiter);
-    numbers = numbers.substr(position + 1);
+  if (hasComment(numbers)) {
+    addNewDelimiter(numbers);
+    numbers = removeComment(numbers);
   }
   int sum = 0;
   while (!numbers.empty()) {
