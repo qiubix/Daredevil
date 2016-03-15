@@ -60,12 +60,19 @@ string tail(string text) {
   }
 }
 
-bool isNextNumberNegative(const string &text) {
-  return text[0] == '-';
-}
-
 int nextNumber(string numbers) {
   return toInt(head(numbers));
+}
+
+string buildExceptionMessage(vector<int> &negatives) {
+  string negativesList = "";
+  for (auto i : negatives) {
+      negativesList += to_string(i);
+      if (i != negatives.back()) {
+        negativesList += ",";
+      }
+    }
+  return negativesList;
 }
 
 int add(string numbers) {
@@ -86,13 +93,7 @@ int add(string numbers) {
     numbers = tail(numbers);
   }
   if ( !negatives.empty() ) {
-    string negativesList = "";
-    for (auto i : negatives) {
-      negativesList += to_string(i);
-      if (i != negatives.back()) {
-        negativesList += ",";
-      }
-    }
+    auto negativesList = buildExceptionMessage(negatives);
     throw NegativesAreNotAllowed(negativesList);
   }
   delimiters = {",", "\n"};
