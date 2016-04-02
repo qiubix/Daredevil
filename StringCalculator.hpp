@@ -4,7 +4,10 @@
 using namespace std;
 
 int add(string numbers) {
-  return 0;
+  if (numbers.empty())
+    return 0;
+  else
+    return atoi(numbers.c_str());
 }
 
 #endif //STRING_CALCULATOR_HPP
