@@ -7,26 +7,28 @@ int toInt(string text) {
   return atoi(text.c_str());
 }
 
-bool hasOnlyOneNumber(string text) {
-  return text.find(',') == string::npos;
-}
-
-string head(string text, size_t delimiterPosition) {
+string head(string text) {
+  auto delimiterPosition = text.find(',');
   return text.substr(0, delimiterPosition);
 }
 
-string tail(string text, size_t delimiterPosition) {
+string tail(string text) {
+  auto delimiterPosition = text.find(',');
+  if (delimiterPosition == string::npos)
+    return "";
   return text.substr(delimiterPosition + 1);
 }
 
 int add(string numbers) {
   if (numbers.empty())
     return 0;
-  else if (hasOnlyOneNumber(numbers))
-    return toInt(numbers);
   else {
-    auto delimiterPosition = numbers.find(',');
-    return toInt(head(numbers, delimiterPosition)) + toInt(tail(numbers, delimiterPosition));
+    int sum = 0;
+    while (!numbers.empty()) {
+      sum += toInt(head(numbers));
+      numbers = tail(numbers);
+    }
+    return sum;
   }
 }
 

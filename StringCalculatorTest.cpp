@@ -18,3 +18,8 @@ TEST(StringCalculator, ReturnsSumForTwoNumbersWithComa) {
   ASSERT_THAT(add("2,1"), Eq(3));
   ASSERT_THAT(add("12,11"), Eq(23));
 }
+
+TEST(StringCalculator, ReturnsSumOfMultipleNumbersWithComa) {
+  ASSERT_THAT(add("1,1,1,1,1"), Eq(5));
+  ASSERT_THAT(add("1000,30,200,4"), Eq(1234));
+}
