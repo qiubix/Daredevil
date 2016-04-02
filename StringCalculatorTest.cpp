@@ -28,3 +28,8 @@ TEST(StringCalculator, HandlesNewLineAsADelimiter) {
   ASSERT_THAT(add("1\n2"), Eq(3));
   ASSERT_THAT(add("21\n400"), Eq(421));
 }
+
+TEST(StringCalculator, SupportsConfiguringDelimiter) {
+  ASSERT_THAT(add("//-\n16-2"), Eq(18));
+  ASSERT_THAT(add("//%\n10%8%5"), Eq(23));
+}
