@@ -3,17 +3,28 @@
 
 using namespace std;
 
+vector<char> delimiters = {',', '\n'};
+
 int toInt(string text) {
   return atoi(text.c_str());
 }
 
+size_t findDelimiter(string text) {
+  for (auto delimiter : delimiters) {
+    auto position = text.find(delimiter);
+    if (position != string::npos)
+      return position;
+  }
+  return string::npos;
+}
+
 string head(string text) {
-  auto delimiterPosition = text.find(',');
+  auto delimiterPosition = findDelimiter(text);
   return text.substr(0, delimiterPosition);
 }
 
 string tail(string text) {
-  auto delimiterPosition = text.find(',');
+  auto delimiterPosition = findDelimiter(text);
   if (delimiterPosition == string::npos)
     return "";
   return text.substr(delimiterPosition + 1);
