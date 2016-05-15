@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: cpp
 compiler: gcc
 python:
@@ -7,8 +7,12 @@ addons:
   apt:
     packages:
       - lcov
+services:
+  - docker
 before_install:
   - pip install --user cpp-coveralls
+  - docker build -t qiubix/discode-pcl .
+  - docker ps -a
 before_script:
   - export COVERALLS_SERVICE_NAME=travis-ci
   - wget https://googlemock.googlecode.com/files/gmock-1.6.0.zip -O /tmp/gmock.zip
